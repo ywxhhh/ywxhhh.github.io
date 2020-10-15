@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>.so文件的生成和使用 - 西瓜呀</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="目的：java代码调用C++代码
+宏命令javah
+1..."> 
+  
+  <meta name="author" content="西瓜呀"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_hhodbqn7tit.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/moeny/alipay.png',
+        wechat: '/images/moeny/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '熬过生活的苦，一定能有属于你的那一份甜⭐'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">.so文件的生成和使用</div>
+  <div class="right">
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/archives " class="underline"> 归档</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/tags " class="underline"> 标签</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/categories " class="underline"> 分类</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
+      
+    </ul>
+    <div class="menu-copyright"></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">.so文件的生成和使用</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>九月 21, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3435</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        </p>
+<h1 id="宏命令"><a href="#宏命令" class="headerlink" title="宏命令"></a>宏命令</h1><h2 id="javah"><a href="#javah" class="headerlink" title="javah"></a>javah</h2><p><img   class="lazyload" data-original="https://i.loli.net/2020/09/21/qCv7BXGu5n4JSEP.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="宏_javah.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Program</span> $JDKPath$/bin/javah<br><span class="hljs-meta">@Arguments</span> -v -jni -d $ModuleFileDir$/src/main/jni $FileClass$<br><span class="hljs-meta">@WorkingDirectory</span> $SourcepathEntry$<br></code></pre></td></tr></table></figure>
+
+<h2 id="ndk-build"><a href="#ndk-build" class="headerlink" title="ndk-build"></a>ndk-build</h2><p><img   class="lazyload" data-original="https://i.loli.net/2020/09/21/X1TmxrMotkPgOFl.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="宏_jni_build.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Program</span> $Ndk路径$\ndk-build.cmd<br><span class="hljs-meta">@WorkingDirectory</span> $ModuleFileDir$\src\main\<br></code></pre></td></tr></table></figure>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><code>app</code>下<code>build.gradle</code>配置（无关配置使用<code>...</code>代替）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java">...<br>def LIBRARY_NAME = <span class="hljs-string">&quot;\&quot;LIBRARY_KEYGEN\&quot;&quot;</span><span class="hljs-comment">//与稍后创建的工具类同名</span><br>...<br>android&#123;<br>    ...<br>    defaultConfig&#123;<br>        ...<br>        ndk &#123;<br>            moduleName LIBRARY_NAME<br>            abiFilters <span class="hljs-string">&quot;armeabi-v7a&quot;</span>, <span class="hljs-string">&quot;x86&quot;</span><span class="hljs-comment">//cpu的类型</span><br>        &#125;<br>    &#125;<br>    buildTypes &#123;<br>        debug&#123;<br>            buildConfigField(<span class="hljs-string">&quot;String&quot;</span>,<span class="hljs-string">&quot;LIBRARY_NAME&quot;</span>,LIBRARY_NAME)<br>            ...<br>        &#125;<br>        release &#123;<br>            buildConfigField(<span class="hljs-string">&quot;String&quot;</span>,<span class="hljs-string">&quot;LIBRARY_NAME&quot;</span>,LIBRARY_NAME)<br>            ...<br>        &#125;<br>    &#125;<br>    sourceSets.main &#123;<br>        jni.srcDirs = [<span class="hljs-string">&#x27;libs&#x27;</span>]<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>local.properties</code>新增配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># NDK路径</span><br><span class="hljs-meta">ndk.dir</span>=<span class="hljs-string">D\:\\AndroidSDK\\ndk\\21.3.6528147</span><br></code></pre></td></tr></table></figure>
+
+<p><code>gradle.properties</code>新增配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">android.useDeprecatedNdk</span>=<span class="hljs-string">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><h2 id="1-创建调用JNI的工具类"><a href="#1-创建调用JNI的工具类" class="headerlink" title="1.创建调用JNI的工具类"></a>1.创建调用JNI的工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.yooking.sodemo;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 通过JNI获取Key值</span><br><span class="hljs-comment"> * Created by yooking on 2020/9/21.</span><br><span class="hljs-comment"> * Copyright (c) 2020 yooking. All rights reserved.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JniKeyUtils</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        System.loadLibrary(BuildConfig.LIBRARY_NAME);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">native</span> String <span class="hljs-title">getKeygen</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-生成-h文件"><a href="#2-生成-h文件" class="headerlink" title="2.生成.h文件"></a>2.生成.h文件</h2><p>右键单击<code>JniKeyUtils</code>文件-<code>NDK</code>（宏命令中的Group值）-<code>javah</code></p>
+<p>生成文件夹：<code>app/src/main/jni</code></p>
+<p>生成文件：<code>com_yooking_sodemo_JniKeyUtils.h</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;jni.h&gt;</span></span><br><span class="hljs-comment">/* Header for class com_yooking_sodemo_JniKeyUtils */</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> _Included_com_yooking_sodemo_JniKeyUtils</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _Included_com_yooking_sodemo_JniKeyUtils</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span><br><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> &#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Class:     com_yooking_sodemo_JniKeyUtils</span><br><span class="hljs-comment"> * Method:    getKeygen</span><br><span class="hljs-comment"> * Signature: ()Ljava/lang/String;</span><br><span class="hljs-comment"> */</span><br>JNIEXPORT jstring JNICALL Java_com_yooking_sodemo_JniKeyUtils_getKeygen<br>  (JNIEnv *, jclass);<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span><br>&#125;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-创建-c文件"><a href="#3-创建-c文件" class="headerlink" title="3.创建.c文件"></a>3.创建.c文件</h2><p>右键单击<code>jni</code>文件夹-<code>New</code>-<code>C/C++ Source File</code></p>
+<p>生成文件：<code>JniKeyUtils.c</code></p>
+<p>往文件中输入：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//</span><br><span class="hljs-comment">// Created by yooking on 2020/9/21.</span><br><span class="hljs-comment">// Copyright (c) 2020 yooking. All rights reserved.</span><br><span class="hljs-comment">//</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;com_yooking_sodemo_JniKeyUtils.h&quot;</span></span><br><br>JNIEXPORT jstring JNICALL Java_com_yooking_sodemo_JniKeyUtils_getKeygen<br>  (JNIEnv * env, jclass object)&#123;<br>    <span class="hljs-keyword">return</span> (*env)-&gt;NewStringUTF(env,<span class="hljs-string">&quot;取得密钥值&quot;</span>);<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-创建-mk文件"><a href="#4-创建-mk文件" class="headerlink" title="4.创建.mk文件"></a>4.创建.mk文件</h2><ol>
+<li>Android.mk</li>
+</ol>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs makefile">LOCAL_PATH := <span class="hljs-variable">$(<span class="hljs-built_in">call</span> my-<span class="hljs-built_in">dir</span>)</span><br><span class="hljs-keyword">include</span> <span class="hljs-variable">$(CLEAR_VARS)</span><br><span class="hljs-comment">#编译生成的文件的类库名——Build.gradle中的命名</span><br>LOCAL_MODULE    := LIBRARY_KEYGEN<br><span class="hljs-comment">#要编译的c文件名称</span><br>LOCAL_SRC_FILES := JniKeyUtils.c<br><span class="hljs-keyword">include</span> <span class="hljs-variable">$(BUILD_SHARED_LIBRARY)</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>applicatiion.mk</li>
+</ol>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#APP_ABI := all</span><br><span class="hljs-comment">#根据需要配置</span><br>APP_ABI := x86<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-生成-so文件"><a href="#5-生成-so文件" class="headerlink" title="5.生成.so文件"></a>5.生成.so文件</h2><p>右键单击<code>jni</code>文件夹-<code>NDK</code>（宏命令中的Group值）-<code>ndk-build</code></p>
+<p>自动生成和<code>jni</code>同级的<code>obj</code>和<code>libs</code>文件夹（<code>obj</code>和<code>libs</code>均可删除）</p>
+<p>手动创建同级文件夹——<code>jniLibs</code>文件夹</p>
+<p>将<code>libs</code>下的文件复制到<code>jniLibs</code>中即可（或修改<code>libs</code>文件名为<code>jniLibs</code>）</p>
+<h2 id="6-运行测试"><a href="#6-运行测试" class="headerlink" title="6.运行测试"></a>6.运行测试</h2><p><code>MainActivity.java</code>文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.yooking.sodemo;<br><br><span class="hljs-keyword">import</span> android.os.Bundle;<br><span class="hljs-keyword">import</span> android.widget.TextView;<br><br><span class="hljs-keyword">import</span> androidx.appcompat.app.AppCompatActivity;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br><br>        ((TextView) findViewById(R.id.tv_test)).setText(JniKeyUtils.getKeygen());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<img   class="lazyload" data-original="https://i.loli.net/2020/09/21/QmnbYVU7WGXSiMH.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="reason.png" style="zoom:30%;" />
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>西瓜呀</li>
+  <li><strong>本文链接：</strong><a href="https://ywxhhh.github.io/2020/09/21/so%E6%96%87%E4%BB%B6%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">https://ywxhhh.github.io/2020/09/21/so%E6%96%87%E4%BB%B6%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BD%BF%E7%94%A8/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="/images/moeny/alipay.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+        
+<nav class="nav">
+  
+  
+    <a href="/2020/08/26/text/">测试<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1243440547 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/ywxhhh " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:1243440547@qq.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-social">
+    
+      &copy; 2020
+  
+  西瓜呀  |  
+    <!-- <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+      本站访客数：<span id="busuanzi_value_site_uv"></span>人次
+    </span> -->
+    <i class="fas fa-chart-area"></i>  |  
+    <span class="post-count">字数统计：569</span>
+  </div>
+  <!-- <div class="footer-copyright"></div> -->
+  <div class="footer-social">
+    <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span>
+  </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  var now = new Date(); 
+  function createtime() { 
+      var grt= new Date("09/23/2020 08:30:00");//此处修改你的建站时间或者网站上线时间 
+      now.setTime(now.getTime()+250); 
+      days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+      if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+      mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+      snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+  } 
+setInterval("createtime()",250);
+</script>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":250,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
