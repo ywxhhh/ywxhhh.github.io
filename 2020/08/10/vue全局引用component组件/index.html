@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue全局引用component组件 - 西瓜呀</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="写在开头的话之前项目封装的的全局组件都是一个页面一个页..."> 
+  
+  <meta name="author" content="西瓜呀"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_hhodbqn7tit.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/moeny/alipay.png',
+        wechat: '/images/moeny/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '熬过生活的苦，一定能有属于你的那一份甜⭐'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">vue全局引用component组件</div>
+  <div class="right">
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/archives " class="underline"> 归档</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/tags " class="underline"> 标签</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/categories " class="underline"> 分类</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
+      
+    </ul>
+    <div class="menu-copyright"></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">vue全局引用component组件</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>八月 10, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2514</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h3 id="写在开头的话"><a href="#写在开头的话" class="headerlink" title="写在开头的话"></a>写在开头的话</h3><p>之前项目封装的的全局组件都是一个页面一个页面引入，鉴于要提高代码的复用性（肯定不是因为懒呀），所以去找了相关的文档,<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/components-registration.html#%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><code>Vue</code></a>，才会有这么骚的操作，啥叫相见恨晚，啥叫追悔莫及。嘿嘿，顺手记录下，免得我忘了，啾咪~</p>
+<h3 id="先来说说这个require-context"><a href="#先来说说这个require-context" class="headerlink" title="先来说说这个require.context"></a>先来说说这个require.context</h3><p><code>require.context</code>是webpack中用来管理依赖的一个函数,此方法会生成一个上下文模块，包含目录下所有的模块的引用，同构正则表达式匹配,然后require进来。敲重点，毕竟都是因为有这个宝贝，我们才能偷懒呀~</p>
+<p>接下来开始正文</p>
+<ol>
+<li>在component文件夹下新建index.js<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  install(Vue) &#123;<br>    <span class="hljs-keyword">const</span> requireComponent = <span class="hljs-built_in">require</span>.context(<br>  <span class="hljs-comment">// 其组件目录的相对路径</span><br>  <span class="hljs-string">&quot;./views/components&quot;</span>,<br>  <span class="hljs-comment">// 是否查询其子目录</span><br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-comment">// 匹配基础组件文件名的正则表达式</span><br>  /\w.(vue|js)/<br>);<br><br><span class="hljs-comment">// For each matching file name...  对应每个匹配的文件名</span><br>requireComponent.keys().forEach(<span class="hljs-function"><span class="hljs-params">fileName</span> =&gt;</span> &#123;<br>  <span class="hljs-comment">// Get the component config  获取组件配置</span><br>  <span class="hljs-keyword">const</span> componentConfig = requireComponent(fileName);<br><br>  <span class="hljs-comment">// 获取组件的 PascalCase 命名</span><br>  <span class="hljs-comment">// 获取和目录深度无关的文件名 (获取组件的组件名)</span><br>  <span class="hljs-keyword">const</span> componentName = fileName<br>    .split(<span class="hljs-string">&quot;/&quot;</span>)<br>    .pop()<br>    .replace(<span class="hljs-regexp">/\.\w+$/</span>, <span class="hljs-string">&quot;&quot;</span>);<br><br>  <span class="hljs-comment">// Globally register the component  全局注册组件</span><br>  Vue.component(<br>    componentName,<br>    <span class="hljs-comment">// 如果这个组件选项是通过 `export default` 导出的，</span><br>    <span class="hljs-comment">// 那么就会优先使用 `.default`，</span><br>    <span class="hljs-comment">// 否则回退到使用模块的根。</span><br>    componentConfig.default || componentConfig<br>  );<br>&#125;);<br></code></pre></td></tr></table></figure></li>
+<li>在mian.js引入<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> components <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components&#x27;</span><br>Vue.use(components)<br></code></pre></td></tr></table></figure></li>
+<li>页面使用<br>文件夹怎么命名，组件就怎么写，建议驼峰命名发<em>eg:</em> <code>BaseButton.vue</code>,<blockquote>
+<p>血的教训告诉我们，一个文件夹下如果有多个组件的话，一个一个去命名，不要为了方便写啥index.vue,血的教训啊~嗯，从此以后封装组件，都不要写index.vue,它不香，一点也不香</p>
+</blockquote>
+<h3 id="骚操作end，愉快敲代码吧"><a href="#骚操作end，愉快敲代码吧" class="headerlink" title="骚操作end，愉快敲代码吧"></a><center>骚操作end，愉快敲代码吧</center></h3></li>
+</ol>
+<h3 id="写个题外话，记录下别人写的方法："><a href="#写个题外话，记录下别人写的方法：" class="headerlink" title="写个题外话，记录下别人写的方法："></a>写个题外话，记录下别人写的方法：</h3><ol>
+<li>假设文件夹base有N个自定义组件,如图：<br><img   class="lazyload" data-original="https://i.loli.net/2020/11/03/GDnVx8hLfd7IaS9.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></li>
+<li>需要在每个组件定义name:<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;z-input&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">el-input</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;z_input&quot;</span> <span class="hljs-attr">:placeholder</span>=<span class="hljs-string">&quot;placeholder&quot;</span> <span class="hljs-attr">v-bind</span>=<span class="hljs-string">&quot;$attrs&quot;</span> <span class="hljs-attr">v-on</span>=<span class="hljs-string">&quot;$listeners&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">el-input</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="javascript">  name: <span class="hljs-string">&quot;z-input&quot;</span>,</span><br>  props: &#123;<br>    placeholder: &#123;<br><span class="javascript">      type: <span class="hljs-built_in">String</span>,</span><br><span class="javascript">      <span class="hljs-keyword">default</span>: <span class="hljs-string">&quot;请输入&quot;</span></span><br>    &#125;<br>  &#125;,<br>&#125;;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>index.js里面内容<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span><span class="hljs-built_in"> default </span>&#123;<br>  install(Vue) &#123;<br>    const requireComponent = require.context(<br>      <span class="hljs-string">&quot;@/base&quot;</span>,<br>      <span class="hljs-literal">true</span>,<br>      /[a-z0-9]+\.(vue)$/i<br>    );<br>    requireComponent.keys().<span class="hljs-keyword">forEach</span>((fileName) =&gt; &#123;<br>      const componentConfig = requireComponent(fileName);<br>      const componentName = componentConfig.default.name;<br>      <span class="hljs-keyword">if</span> (componentName) &#123;<br>        Vue.component(<br>          componentName,<br>          componentConfig.default || componentConfig<br>        );<br>      &#125;<br>    &#125;);<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li>main.js引入<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-keyword">import</span> <span class="hljs-built_in">global</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/base&quot;</span>;<br>Vue.use(<span class="hljs-built_in">global</span>);<br></code></pre></td></tr></table></figure></li>
+<li>页面使用：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">z-input</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;form.name&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">z-input</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>西瓜呀</li>
+  <li><strong>本文链接：</strong><a href="https://ywxhhh.github.io/2020/08/10/vue%E5%85%A8%E5%B1%80%E5%BC%95%E7%94%A8component%E7%BB%84%E4%BB%B6/index.html">https://ywxhhh.github.io/2020/08/10/vue%E5%85%A8%E5%B1%80%E5%BC%95%E7%94%A8component%E7%BB%84%E4%BB%B6/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="/images/moeny/alipay.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li></ul>
+
+        
+<nav class="nav">
+  
+    <a href="/2020/11/04/vue-elementUI%E8%A1%A8%E6%A0%BC%E5%AF%BC%E5%87%BA%EF%BC%8C%E5%AF%BC%E5%87%BA%E5%85%A8%E9%83%A8%EF%BC%8C%E5%AF%BC%E5%87%BA%E6%9C%AC%E9%A1%B5/"><i class="iconfont iconleft"></i>vue+elementUI表格导出，导出全部，导出本页</a>
+  
+  
+    <a href="/2020/05/02/vue%E5%9B%BE%E7%89%87%E7%82%B9%E5%87%BB%E6%94%BE%E5%A4%A7/">vue图片点击放大<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1243440547 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/ywxhhh " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:1243440547@qq.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-social">
+    
+      &copy; 2019-2020
+  
+  西瓜呀  |  
+    <!-- <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+      本站访客数：<span id="busuanzi_value_site_uv"></span>人次
+    </span> -->
+    <i class="fas fa-chart-area"></i>  |  
+    <span class="post-count">字数统计：4.2k</span>
+  </div>
+  <!-- <div class="footer-copyright"></div> -->
+  <div class="footer-social">
+    <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span>
+  </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  var now = new Date(); 
+  function createtime() { 
+      var grt= new Date("04/07/2019 00:03:00");//此处修改你的建站时间或者网站上线时间 
+      now.setTime(now.getTime()+250); 
+      days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+      if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+      mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+      snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+  } 
+setInterval("createtime()",250);
+</script>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":250,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>

@@ -7,14 +7,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>关于西瓜呀 - 西瓜呀</title>
+  <title>vue图片点击放大 - 西瓜呀</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
 
   
   
-  <meta name="description" content="做个清淡欢颜的女子，寂静于暖，安然于甜"> 
+  <meta name="description" content="1. 安装组件1npm install v-viewe..."> 
   
   <meta name="author" content="西瓜呀"> 
 
@@ -106,7 +106,7 @@
 
 <nav class="navbar">
   <div class="left"></div>
-  <div class="center">关于西瓜呀</div>
+  <div class="center">vue图片点击放大</div>
   <div class="right">
     <i class="iconfont iconmenu j-navbar-menu"></i>
   </div>
@@ -153,27 +153,110 @@
     <article class="article">
   <div class="wrap">
     <section class="head">
-  <img   class="lazyload" data-original="/images/about/me.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <img   class="lazyload" data-original="/images/theme/3.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
   <div class="head-mask">
-    <h1 class="head-title">关于西瓜呀</h1>
+    <h1 class="head-title">vue图片点击放大</h1>
     <div class="head-info">
-      <span class="post-info-item"><i class="iconfont iconcalendar"></i>九月 23, 2020</span
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 02, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>19</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1339</span>
     </div>
   </div>
 </section>
     <section class="main">
       <section class="content">
-        <h3>做个清淡欢颜的女子，寂静于暖，安然于甜</h3>
+        <h3 id="1-安装组件"><a href="#1-安装组件" class="headerlink" title="1. 安装组件"></a>1. 安装组件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> v-viewer <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
+<h3 id="2-引入"><a href="#2-引入" class="headerlink" title="2. 引入"></a>2. 引入</h3><p>在main.js引入,根据项目需要，配置属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">import</span> Viewer <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;v-viewer&#x27;</span><span class="hljs-comment">// 图片放大插件</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;viewerjs/dist/viewer.css&#x27;</span><br>Vue.use(Viewer)<br>Viewer.setDefaults(&#123;<br>  Options: &#123;<br>    <span class="hljs-string">&#x27;inline&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;button&#x27;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-string">&#x27;navbar&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;toolbar&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;tooltip&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;movable&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;zoomable&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;rotatable&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;scalable&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;transition&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;fullscreen&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;keyboard&#x27;</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-string">&#x27;url&#x27;</span>: <span class="hljs-string">&#x27;data-source&#x27;</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<h3 id="3-各属性，可自行配置-Options-里面的值说明"><a href="#3-各属性，可自行配置-Options-里面的值说明" class="headerlink" title="3. 各属性，可自行配置 Options 里面的值说明"></a>3. 各属性，可自行配置 Options 里面的值说明</h3><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">默认值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">inline</td>
+<td align="center">false</td>
+<td align="center">启用 inline 模式</td>
+</tr>
+<tr>
+<td align="center">button</td>
+<td align="center">true</td>
+<td align="center">显示右上角关闭按钮</td>
+</tr>
+<tr>
+<td align="center">navbar</td>
+<td align="center">true</td>
+<td align="center">显示缩略图导航</td>
+</tr>
+<tr>
+<td align="center">title</td>
+<td align="center">true</td>
+<td align="center">显示当前图片的标题</td>
+</tr>
+<tr>
+<td align="center">toolbar</td>
+<td align="center">true</td>
+<td align="center">显示工具栏</td>
+</tr>
+<tr>
+<td align="center">tooltip</td>
+<td align="center">true</td>
+<td align="center">显示缩放百分比</td>
+</tr>
+<tr>
+<td align="center">movable</td>
+<td align="center">true</td>
+<td align="center">图片是否可移动</td>
+</tr>
+<tr>
+<td align="center">zoomable</td>
+<td align="center">true</td>
+<td align="center">图片是否可缩放</td>
+</tr>
+<tr>
+<td align="center">rotatable</td>
+<td align="center">true</td>
+<td align="center">图片是否可旋转</td>
+</tr>
+<tr>
+<td align="center">scalable</td>
+<td align="center">true</td>
+<td align="center">图片是否可翻转</td>
+</tr>
+<tr>
+<td align="center">transition</td>
+<td align="center">true</td>
+<td align="center">使用 CSS3 过度</td>
+</tr>
+<tr>
+<td align="center">fullscreen</td>
+<td align="center">true</td>
+<td align="center">播放时是否全屏</td>
+</tr>
+<tr>
+<td align="center">keyboard</td>
+<td align="center">true</td>
+<td align="center">是否支持键盘</td>
+</tr>
+<tr>
+<td align="center">url</td>
+<td align="center">src</td>
+<td align="center">设置大图片的 url</td>
+</tr>
+</tbody></table>
+<h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;viewer :images&#x3D;&quot;signImages&quot;&gt;<br>    &lt;img v-for&#x3D;&quot;src in signImages&quot; :src&#x3D;&quot;src&quot; :key&#x3D;&quot;src&quot; width&#x3D;&quot;50&quot;&gt;<br>&lt;&#x2F;viewer&gt;<br></code></pre></td></tr></table></figure>
+
       </section>
       <section class="extra">
         
         <ul class="copyright">
   
   <li><strong>本文作者：</strong>西瓜呀</li>
-  <li><strong>本文链接：</strong><a href="https://ywxhhh.github.io/about/index.html">https://ywxhhh.github.io/about/index.html</a></li>
+  <li><strong>本文链接：</strong><a href="https://ywxhhh.github.io/2020/05/02/vue%E5%9B%BE%E7%89%87%E7%82%B9%E5%87%BB%E6%94%BE%E5%A4%A7/index.html">https://ywxhhh.github.io/2020/05/02/vue%E5%9B%BE%E7%89%87%E7%82%B9%E5%87%BB%E6%94%BE%E5%A4%A7/index.html</a></li>
   <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
       rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
   
@@ -191,7 +274,18 @@
 </section>
         
         
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li></ul>
+
         
+<nav class="nav">
+  
+    <a href="/2020/08/10/vue%E5%85%A8%E5%B1%80%E5%BC%95%E7%94%A8component%E7%BB%84%E4%BB%B6/"><i class="iconfont iconleft"></i>vue全局引用component组件</a>
+  
+  
+    <a href="/2019/05/26/Markdown%E5%AD%A6%E4%B9%A0/">Markdown 学习<i class="iconfont iconright"></i></a>
+  
+</nav>
+
       </section>
       
     </section>

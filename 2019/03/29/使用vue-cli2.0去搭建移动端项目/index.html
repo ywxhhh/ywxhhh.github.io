@@ -1,0 +1,402 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>使用vue-cli2.0去搭建移动端项目 - 西瓜呀</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="使用脚手架去搭建一个vue项目，其中包括webpack..."> 
+  
+  <meta name="author" content="西瓜呀"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_hhodbqn7tit.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/moeny/alipay.png',
+        wechat: '/images/moeny/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '熬过生活的苦，一定能有属于你的那一份甜⭐'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">使用vue-cli2.0去搭建移动端项目</div>
+  <div class="right">
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/archives " class="underline"> 归档</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/tags " class="underline"> 标签</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/categories " class="underline"> 分类</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
+      
+    </ul>
+    <div class="menu-copyright"></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">使用vue-cli2.0去搭建移动端项目</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>三月 29, 2019</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4555</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <p>使用脚手架去搭建一个vue项目，其中包括webpack打包时要修改的内容，还有用到的框架，和使用vm的移动端适配，还有一厘米像素差</p>
+<h3 id="1-安装vue-cli"><a href="#1-安装vue-cli" class="headerlink" title="1. 安装vue-cli"></a>1. 安装vue-cli</h3><ol>
+<li>使用npm（需要安装node环境）全局安装webpack，打开命令行工具输入：<code>npm install webpack -g</code>或者（<code>npm install -g webpack</code>），安装完成之后输入 webpack -v，如果出现相应的版本号，则说明安装成功。</li>
+<li>全局安装vue-cli，在cmd中输入命令 : <code>npm install --global vue-cli</code>,安装完成之后输入 <code>vue -V</code>（注意这里是大写的“V”），如果出现相应的版本号，则说明安装成功。</li>
+</ol>
+<h3 id="2-用vue-cli来构建项目"><a href="#2-用vue-cli来构建项目" class="headerlink" title="2. 用vue-cli来构建项目"></a>2. 用vue-cli来构建项目</h3><ol>
+<li>在你要建的盘，新建一个文件夹， cd (文件夹名称)<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql">vue init webpack （项目名称）<br>? Project name （项目名称） <span class="hljs-comment"># 项目名称，直接回车，按照括号中默认名字（注意这里的名字不能有大写字母，如果有会报错Sorry, name can no longer contain capital letters），阮一峰老师博客为什么文件名要小写 ，可以参考一下。</span><br>? Project description A Vue.js project <span class="hljs-comment"># 项目描述,随便写</span><br>? Author <span class="hljs-comment"># 作者名称</span><br>? Vue build standalone <span class="hljs-comment"># 我选择的运行加编译时</span><br>	Runtime + Compiler: recommended for most users<br>? <span class="hljs-keyword">Install</span> vue-router? Yes <span class="hljs-comment"># 是否需要 vue-router，路由肯定要的</span><br>? <span class="hljs-keyword">Use</span> ESLint <span class="hljs-keyword">to</span> lint your code? N <span class="hljs-comment"># 是否使用 ESLint 作为代码规范.  一般都是N</span><br>? Pick an ESLint preset Standard <span class="hljs-comment"># 一样的ESlint 相关   一般都是N</span><br>? <span class="hljs-keyword">Set</span> up unit tests Yes <span class="hljs-comment"># 是否安装单元测试   一般都是N</span><br>? Pick a <span class="hljs-keyword">test</span> runner 按需选择 <span class="hljs-comment"># 测试模块   一般都是N</span><br>? Setup e2e tests <span class="hljs-keyword">with</span> Nightwatch? 安装选择 <span class="hljs-comment"># e2e 测试   一般都是N</span><br>? Should we run npm <span class="hljs-keyword">install</span> <span class="hljs-keyword">for</span> you <span class="hljs-keyword">after</span> the <span class="hljs-keyword">project</span> has been created? (recommended) npm <span class="hljs-comment"># 包管理器，我选的NPM</span><br></code></pre></td></tr></table></figure></li>
+<li>配置完成后，可以看到目录下多出了一个项目文件夹baoge，然后cd进入这个文件夹</li>
+</ol>
+<h3 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3. 安装依赖"></a>3. 安装依赖</h3><ol>
+<li><p><code>npm install</code></p>
+</li>
+<li><p>安装axios,安装vant</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install axios --save<br><span class="hljs-built_in">npm</span> i vant -S<br></code></pre></td></tr></table></figure></li>
+<li><p>根据相关配置：页面适配：用vw,用css代码解决1px问题，具体的相关配置看<a target="_blank" rel="noopener" href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html">大漠老师的这篇文章</a></p>
+<ul>
+<li>通过Vue-cli构建的项目，在项目的根目录下有一个.postcssrc.js<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk">module.exports = &#123;<br>  <span class="hljs-string">&quot;plugins&quot;</span>: &#123;<br>    <span class="hljs-regexp">//</span> postcss-import主要功有是解决@import引入路径问题。使用这个插件，可以让你很轻易的使用本地文件、node_modules或者web_modules的文件。这个插件配合postcss-url让你引入文件变得更轻松。<br>    <span class="hljs-string">&quot;postcss-import&quot;</span>: &#123;&#125;,<br>    <span class="hljs-regexp">//</span> 该插件主要用来处理文件，比如图片文件、字体文件等引用路径的处理。在Vue项目中，vue-loader已具有类似的功能，只需要配置中将vue-loader配置进去。<br>    <span class="hljs-string">&quot;postcss-url&quot;</span>: &#123;&#125;,<br>    <span class="hljs-regexp">//</span> autoprefixer插件是用来自动处理浏览器前缀的一个插件。如果你配置了postcss-cssnext，其中就已具备了autoprefixer的功能。在配置的时候，未显示的配置相关参数的话，表示使用的是Browserslist指定的列表参数，你也可以像这样来指定last <span class="hljs-number">2</span> versions 或者 &gt; <span class="hljs-number">5</span>%。如此一来，你在编码时不再需要考虑任何浏览器前缀的问题，可以专心撸码。这也是PostCSS最常用的一个插件之一。<br>    <span class="hljs-string">&quot;autoprefixer&quot;</span>: &#123;&#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>我们需要的插件,vue-cli已经默认帮我们安装了三个了,接下来按照剩下的插件<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">npm i postcss-aspect-ratio-mini postcss-px-<span class="hljs-keyword">to</span>-viewport postcss-<span class="hljs-built_in">write</span>-svg postcss-cssnext cssnano <span class="hljs-comment">--S</span><br></code></pre></td></tr></table></figure>
+安装失败的小伙伴就多安装几次<br>注意!注意!注意! 敲黑板了! cssnano的版本一定要3.10.0的, 4.0的版本不兼容报错<br>安装成功后,package.json里面应该是这样的<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-string">&quot;dependencies&quot;</span>: &#123;<br>  <span class="hljs-string">&quot;cssnano&quot;</span>: <span class="hljs-string">&quot;^3.10.0&quot;</span>,<br>  <span class="hljs-string">&quot;cssnano-preset-advanced&quot;</span>: <span class="hljs-string">&quot;^4.0.5&quot;</span>,<br>  <span class="hljs-string">&quot;postcss-aspect-ratio-mini&quot;</span>: <span class="hljs-string">&quot;0.0.2&quot;</span>,<br>  <span class="hljs-string">&quot;postcss-cssnext&quot;</span>: <span class="hljs-string">&quot;^3.1.0&quot;</span>,<br>  <span class="hljs-string">&quot;postcss-px-to-viewport&quot;</span>: <span class="hljs-string">&quot;0.0.3&quot;</span>,<br>  <span class="hljs-string">&quot;postcss-write-svg&quot;</span>: <span class="hljs-string">&quot;^3.0.1&quot;</span>,<br>  <span class="hljs-string">&quot;vue&quot;</span>: <span class="hljs-string">&quot;^2.5.2&quot;</span>,<br>  <span class="hljs-string">&quot;vue-router&quot;</span>: <span class="hljs-string">&quot;^3.0.1&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>接下来在.postcssrc.js文件对新安装的PostCSS插件进行配置<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">module.exports</span> <span class="hljs-string">=</span> &#123;<br>  <span class="hljs-attr">&quot;plugins&quot;:</span> &#123;<br>    <span class="hljs-attr">&quot;postcss-import&quot;:</span> &#123;&#125;,<br>    <span class="hljs-attr">&quot;postcss-url&quot;:</span> &#123;&#125;,<br>    <span class="hljs-attr">&quot;postcss-aspect-ratio-mini&quot;:</span> &#123;&#125;,<br>    <span class="hljs-attr">&quot;postcss-write-svg&quot;:</span> &#123;<br>      <span class="hljs-attr">utf8:</span> <span class="hljs-literal">false</span><br>    &#125;,<br>    <span class="hljs-string">//</span> <span class="hljs-attr">postcss-cssnext:</span> <span class="hljs-string">postcss-cssnext其实就是cssnext。该插件可以让我们使用CSS未来的特性，其会对这些特性做相关的兼容性处理</span><br>    <span class="hljs-attr">&quot;postcss-cssnext&quot;:</span> &#123;&#125;,<br>    <span class="hljs-string">//</span> <span class="hljs-attr">postcss-px-to-viewport:</span> <span class="hljs-string">postcss-px-to-viewport插件主要用来把px单位转换为vw、vh、vmin或者vmax这样的视窗单位</span><br>    <span class="hljs-attr">&quot;postcss-px-to-viewport&quot;:</span> &#123;<br>      <span class="hljs-attr">viewportWidth:</span> <span class="hljs-number">750</span>, <span class="hljs-string">//</span> <span class="hljs-string">视窗的宽度，对应的是我们设计稿的宽度，一般是750</span><br>      <span class="hljs-attr">viewportHeight:</span> <span class="hljs-number">1334</span>, <span class="hljs-string">//</span> <span class="hljs-string">视窗的高度，根据750设备的宽度来指定，一般指定1334，也可以不配置</span><br>      <span class="hljs-attr">unitPrecision:</span> <span class="hljs-number">3</span>, <span class="hljs-string">//</span> <span class="hljs-string">指定`px`转换为视窗单位值的小数位数（很多时候无法整除）</span><br>      <span class="hljs-attr">viewportUnit:</span> <span class="hljs-string">&#x27;vw&#x27;</span>, <span class="hljs-string">//</span> <span class="hljs-string">指定需要转换成的视窗单位，建议使用vw</span><br>      <span class="hljs-attr">selectorBlackList:</span> [<span class="hljs-string">&#x27;.ignore&#x27;</span>, <span class="hljs-string">&#x27;.hairlines&#x27;</span>], <span class="hljs-string">//</span> <span class="hljs-string">指定不转换为视窗单位的类，可以自定义，可以无限添加</span>,<span class="hljs-string">建议定义一至两个通用的类名。</span><br>      <span class="hljs-attr">minPixelValue:</span> <span class="hljs-number">1</span>, <span class="hljs-string">//</span> <span class="hljs-string">小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值。</span><br>      <span class="hljs-attr">mediaQuery:</span> <span class="hljs-literal">false</span> <span class="hljs-string">//</span> <span class="hljs-string">允许在媒体查询中转换`px`</span><br>    &#125;,<br>    <span class="hljs-string">//</span> <span class="hljs-attr">cssnano:</span> <span class="hljs-string">cssnano主要用来压缩和清理CSS代码。在Webpack中，cssnano和css-loader捆绑在一起，所以不需要自己加载它。不过你也可以使用postcss-loader显式的使用cssnano</span><br>    <span class="hljs-attr">&quot;cssnano&quot;:</span> &#123;<br>      <span class="hljs-attr">preset:</span> <span class="hljs-string">&quot;advanced&quot;</span>,<br>      <span class="hljs-attr">autoprefixer:</span> <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">&quot;postcss-zindex&quot;:</span> <span class="hljs-literal">false</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>特别声明：由于cssnext和cssnano都具有autoprefixer,事实上只需要一个，所以把默认的autoprefixer删除掉，然后把cssnano中的autoprefixer设置为false。对于其他的插件使用，代码中的注释都做了简单的介绍。</p>
+</blockquote>
+</li>
+<li>在cssnano的配置中，使用了preset: “advanced”，所以我们需要另外安装<br><code>npm i cssnano-preset-advanced --save-dev</code></li>
+<li>cssnano集成了一些其他的PostCSS插件，如果你想禁用cssnano中的某个插件的时候，可以像下面这样操作：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">&quot;cssnano&quot;:</span> &#123;<br>  <span class="hljs-attr">preset:</span> <span class="hljs-string">&quot;advanced&quot;</span>,<br>  <span class="hljs-attr">autoprefixer:</span> <span class="hljs-literal">false</span>,<br>  <span class="hljs-attr">&quot;postcss-zindex&quot;:</span> <span class="hljs-literal">false</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>上面的代码把autoprefixer和postcss-zindex禁掉了。前者是有重复调用，后者是一个讨厌的东东。只要启用了这个插件，z-index的值就会重置为1。这是一个天坑，千万记得将postcss-zindex设置为false。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>到此,配置结束,可以开始撸代码了,直接按照设计稿的大小写样式,编译后会自动转化为vw</p>
+</li>
+</ol>
+<h3 id="4-启动项目"><a href="#4-启动项目" class="headerlink" title="4. 启动项目"></a>4. 启动项目</h3><p>  <code>npm run dev</code></p>
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>西瓜呀</li>
+  <li><strong>本文链接：</strong><a href="https://ywxhhh.github.io/2019/03/29/%E4%BD%BF%E7%94%A8vue-cli2.0%E5%8E%BB%E6%90%AD%E5%BB%BA%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B9%E7%9B%AE/index.html">https://ywxhhh.github.io/2019/03/29/%E4%BD%BF%E7%94%A8vue-cli2.0%E5%8E%BB%E6%90%AD%E5%BB%BA%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B9%E7%9B%AE/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="/images/moeny/alipay.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-cli/" rel="tag">vue-cli</a></li></ul>
+
+        
+<nav class="nav">
+  
+    <a href="/2019/04/15/vue-cli%E6%89%93%E5%8C%85%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98/"><i class="iconfont iconleft"></i>vue-cli打包可能存在问题</a>
+  
+  
+</nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1243440547 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/ywxhhh " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:1243440547@qq.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-social">
+    
+      &copy; 2019-2020
+  
+  西瓜呀  |  
+    <!-- <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+      本站访客数：<span id="busuanzi_value_site_uv"></span>人次
+    </span> -->
+    <i class="fas fa-chart-area"></i>  |  
+    <span class="post-count">字数统计：4.2k</span>
+  </div>
+  <!-- <div class="footer-copyright"></div> -->
+  <div class="footer-social">
+    <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span>
+  </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  var now = new Date(); 
+  function createtime() { 
+      var grt= new Date("04/07/2019 00:03:00");//此处修改你的建站时间或者网站上线时间 
+      now.setTime(now.getTime()+250); 
+      days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+      if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+      mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+      snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+  } 
+setInterval("createtime()",250);
+</script>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":250,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
